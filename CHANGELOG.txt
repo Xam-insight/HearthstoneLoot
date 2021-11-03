@@ -1,4 +1,6 @@
-﻿- v1.2.5
+﻿- v1.2.6
+	- TOC for 9.1.5.
+- v1.2.5
 	- New: Warforged and Titanforged items now sound "GOLDEN"!
 - v1.2.4
 	- Plays victory music when enabling this option.
