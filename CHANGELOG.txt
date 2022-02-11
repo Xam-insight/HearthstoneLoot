@@ -1,4 +1,6 @@
-﻿- v1.2.6
+﻿- v1.2.7
+	- TOC for 9.2.
+- v1.2.6
 	- TOC for 9.1.5.
 - v1.2.5
 	- New: Warforged and Titanforged items now sound "GOLDEN"!
