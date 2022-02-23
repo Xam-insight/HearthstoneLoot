@@ -157,7 +157,9 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 		end
 	end
 
-	if rarity > 0 and not HearthstoneLootOptionsData["LootShoutDisabled"] then
+	if rarity > 0 and not HearthstoneLootOptionsData["LootShoutDisabled"]
+			and (HearthstoneLootOptionsData["LootShoutInMailboxEnabled"]
+				or not MailFrame:IsShown()) then
 		HearthstoneLoot_PlayQualitySoundFile(rarity, isWarforged)
 	end
 

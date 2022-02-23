@@ -10,6 +10,8 @@ L["ENABLE_VICTORY_MUSIC_DESC"] = "Enables / disables the Hearthstone victory mus
 L["LOOT_SECTION"] = "Loot Options"
 L["ENABLE_LOOT_SHOUTS"] = "Enable voice for the items below"
 L["ENABLE_LOOT_SHOUTS_DESC"] = "Enables / disables the Innkeeper voice when looting the items below."
+L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"] = "Enable voice when the mailbox is open"
+L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"] = "Enables / disables the Innkeeper voice when the mailbox is open."
 
 L["TORGHAST_SECTION"] = "Torghast Options"
 L["ENABLE_ANIMA_POWERS_SHOUTS"] = "Enable voice"

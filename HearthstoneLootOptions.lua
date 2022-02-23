@@ -211,6 +211,18 @@ function loadHearthstoneLootOptions()
 							return HearthstoneLootOptionsData[OTHER] or 0
 						end
 					},
+					enableLootShoutsInMailbox = {
+						type = "toggle", order = 8,
+						width = "full",
+						name = L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"],
+						desc = L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"],
+						set = function(info, val)
+							HearthstoneLootOptionsData["LootShoutInMailboxEnabled"] = val
+						end,
+						get = function(info)
+							return HearthstoneLootOptionsData["LootShoutInMailboxEnabled"]
+						end
+					},
 				},
 			},
 		},
@@ -257,5 +269,5 @@ function loadHearthstoneLootOptions()
 
 	ACR:RegisterOptionsTable("HearthstoneLoot", HearthstoneLootOptions)
 	ACD:AddToBlizOptions("HearthstoneLoot", "HearthstoneLoot")
-	ACD:SetDefaultSize("HearthstoneLoot", 420, 515)
+	ACD:SetDefaultSize("HearthstoneLoot", 420, 543)
 end

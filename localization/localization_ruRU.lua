@@ -11,6 +11,8 @@ L["ENABLE_VICTORY_MUSIC_DESC"] = "Включает / отключает музы
 L["LOOT_SECTION"] = "Настройки Добычи"
 L["ENABLE_LOOT_SHOUTS"] = "Включить озвучку для предметов ниже"
 L["ENABLE_LOOT_SHOUTS_DESC"] = "Включает / отключает голос трактирщика при получении предметов ниже."
+L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"] = "Включить голос когда почтовый ящик открыт"
+L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"] = "Включает / отключает голос трактирщика когда почтовый ящик открыт."
 
 L["TORGHAST_SECTION"] = "Настройки Торгаста"
 L["ENABLE_ANIMA_POWERS_SHOUTS"] = "Включить голос"

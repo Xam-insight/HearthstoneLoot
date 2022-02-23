@@ -1,4 +1,6 @@
-﻿- v1.2.7
+﻿- v1.2.8
+	- Added: An option to disable HSL when the mailbox is open.
+- v1.2.7
 	- TOC for 9.2.
 - v1.2.6
 	- TOC for 9.1.5.
