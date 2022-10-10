@@ -1,4 +1,7 @@
-﻿- v1.2.8
+﻿- v1.2.9
+	- TOC for 9.2.7.
+	- Sound when changing anima quality.
+- v1.2.8
 	- Added: An option to disable HSL when the mailbox is open.
 - v1.2.7
 	- TOC for 9.2.

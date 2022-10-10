@@ -8,9 +8,7 @@ externals:
 	Libs/Ace3/AceGUI-3.0: https://repos.wowace.com/wow/ace3/trunk/AceGUI-3.0
 	Libs/Ace3/AceLocale-3.0: https://repos.wowace.com/wow/ace3/trunk/AceLocale-3.0
 	Libs/Ace3/CallbackHandler-1.0: https://repos.wowace.com/wow/ace3/trunk/CallbackHandler-1.0
-	#Libs/CallbackHandler-1.0: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
 	Libs/Ace3/LibStub: https://repos.wowace.com/wow/ace3/trunk/LibStub
-	#Libs/LibStub: https://repos.wowace.com/wow/libstub/trunk
 
 manual-changelog:
 	filename: CHANGELOG.txt

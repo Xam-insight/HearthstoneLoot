@@ -256,6 +256,7 @@ function loadHearthstoneLootOptions()
 						values = qualityValues,
 						sorting = qualitySorting,
 						set = function(info, val)
+							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
 							HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = val
 						end,
 						get = function(info)
