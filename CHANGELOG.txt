@@ -1,4 +1,6 @@
-﻿- v1.2.9
+﻿- v1.2.10
+	- Updated for Dragonflight.
+- v1.2.9
 	- TOC for 9.2.7.
 	- Sound when changing anima quality.
 - v1.2.8
