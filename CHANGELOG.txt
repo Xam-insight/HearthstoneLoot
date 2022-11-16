@@ -1,4 +1,7 @@
-﻿- v1.2.10
+﻿- v1.2.11
+	- TOC for 10.0.2.
+	- Fixed the usage of C_Container methods.
+- v1.2.10
 	- Updated for Dragonflight.
 - v1.2.9
 	- TOC for 9.2.7.

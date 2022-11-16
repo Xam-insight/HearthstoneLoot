@@ -97,7 +97,7 @@ function HearthstoneLoot:OnInitialize()
 	self:RegisterEvent("BOSS_KILL", "OnEventBossKill")
 
 	hooksecurefunc(C_NewItems, "RemoveNewItem", function(i, j)
-		local itemID = GetContainerItemID(i, j)
+		local itemID = C_Container.GetContainerItemID(i, j)
 		if itemID and i <= NUM_BAG_SLOTS  then
 			eraseAlreadyLooted(itemID)
 		end
@@ -127,18 +127,19 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 	local isWarforged = nil
 	local bagCheckTime = time()
 	for bag = 0, NUM_BAG_SLOTS do
-		for j = 1, GetContainerNumSlots(bag) do
+		for j = 1, C_Container.GetContainerNumSlots(bag) do
 			if C_NewItems.IsNewItem(bag, j) then
-				local _, _, _, quality, _, _, itemLink, _, _, itemID = GetContainerItemInfo(bag, j)
-				local _, _, _, _, _, itemType = GetItemInfo(itemID)
-				local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemLink)
-				if tContains(lootItemRarity, quality) and ((HearthstoneLootOptionsData[itemType] and quality >= HearthstoneLootOptionsData[itemType]) or (not HearthstoneLootOptionsData[itemType] and quality >= HearthstoneLootOptionsData[OTHER])) then
+				local itemInfo = C_Container.GetContainerItemInfo(bag, j)
+
+				local _, _, _, _, _, itemType = GetItemInfo(itemInfo.itemID)
+				local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
+				if tContains(lootItemRarity, itemInfo.quality) and ((HearthstoneLootOptionsData[itemType] and quality >= HearthstoneLootOptionsData[itemType]) or (not HearthstoneLootOptionsData[itemType] and itemInfo.quality >= HearthstoneLootOptionsData[OTHER])) then
 					if not timeAlreadyLooted then
-						if quality > rarity or (not isWarforged and quality == rarity) then
-							rarity = quality
+						if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
+							rarity = itemInfo.quality
 
 							isWarforged = nil
-							local itemstring = string.match(itemLink, "item[%-?%d:]+")
+							local itemstring = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
 							if itemstring then
 								local numbonuses = select(14, strsplit(":", itemstring))
 								numbonuses = tonumber(numbonuses) or 0
@@ -151,7 +152,7 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 							end
 						end
 					end
-					hslMarkAsAlreadyLooted(itemLink, bag, bagCheckTime)
+					hslMarkAsAlreadyLooted(itemInfo.hyperlink, bag, bagCheckTime)
 				end
 			end
 		end

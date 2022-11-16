@@ -1,6 +1,6 @@
-## Interface: 100000
+## Interface: 100002
 ## Title: Hearthstone Loot |T346292:16|t
-## Version: 1.2.10
+## Version: 1.2.11
 ## Notes: Hearthstone Innkeeper voice on rare, epic and lengendary loots.
 ## Author: Xam_insight
 ## SavedVariables: HearthstoneLootOptionsData
