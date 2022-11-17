@@ -133,7 +133,7 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 
 				local _, _, _, _, _, itemType = GetItemInfo(itemInfo.itemID)
 				local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
-				if tContains(lootItemRarity, itemInfo.quality) and ((HearthstoneLootOptionsData[itemType] and quality >= HearthstoneLootOptionsData[itemType]) or (not HearthstoneLootOptionsData[itemType] and itemInfo.quality >= HearthstoneLootOptionsData[OTHER])) then
+				if tContains(lootItemRarity, itemInfo.quality) and ((HearthstoneLootOptionsData[itemType] and itemInfo.quality >= HearthstoneLootOptionsData[itemType]) or (not HearthstoneLootOptionsData[itemType] and itemInfo.quality >= HearthstoneLootOptionsData[OTHER])) then
 					if not timeAlreadyLooted then
 						if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
 							rarity = itemInfo.quality

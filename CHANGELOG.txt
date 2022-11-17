@@ -1,4 +1,6 @@
-﻿- v1.2.11
+﻿- v1.2.12
+	- Fixed the usage of C_Container methods.
+- v1.2.11
 	- TOC for 10.0.2.
 	- Fixed the usage of C_Container methods.
 - v1.2.10
