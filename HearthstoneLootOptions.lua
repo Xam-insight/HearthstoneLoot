@@ -18,6 +18,16 @@ local qualitySorting = {
 	[3] = 4,
 	[4] = 5,
 }
+local rarityValues = {
+	[100] = NONE,
+	[3] = "|c"..rareColorHex..ITEM_QUALITY3_DESC.."|r "..L["HSL_ORBETTER"],
+	[4] = "|c"..epicColorHex..ITEM_QUALITY4_DESC.."|r "..L["HSL_ORBETTER"],
+}
+local raritySorting = {
+	[1] = 100,
+	[2] = 3,
+	[3] = 4,
+}
 local languageValues = {
 	["deDE"] = DEDE,
 	["enGB"] = ENGB,
@@ -249,12 +259,12 @@ function loadHearthstoneLootOptions()
 					},
 					animaPowersQuality = {
 						type = "select", order = 2,
-						name = LOOT_JOURNAL_POWERS,
+						name = MAW_POWER_DESCRIPTION.." / "..POWER_TYPE_COBALT_POWER,
 						disabled = function()
 							return HearthstoneLootOptionsData["TorghastShoutDisabled"]
 						end,
-						values = qualityValues,
-						sorting = qualitySorting,
+						values = rarityValues,
+						sorting = raritySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
 							HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = val

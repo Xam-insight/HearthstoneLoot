@@ -1,6 +1,6 @@
 ﻿- v1.3
 	- TOC for 10.0.7.
-	- Updated to shout Primal Storms buffs.
+	- Updated to shout Cobalt Assembly buffs.
 - v1.2.13
 	- TOC for 10.0.5.
 - v1.2.12

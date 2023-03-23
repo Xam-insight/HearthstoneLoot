@@ -4,7 +4,7 @@
 ## Notes: Hearthstone Innkeeper voice on rare, epic and lengendary loots.
 ## Author: Xam_insight
 ## SavedVariables: HearthstoneLootOptionsData
-## SavedVariablesPerCharacter: HearthstoneLoot_alreadyLootedItems, HearthstoneLoot_alreadyGainedBuff
+## SavedVariablesPerCharacter: HearthstoneLoot_alreadyLootedItems
 
 Libs\Ace3\LibStub\LibStub.lua
 Libs\Ace3\AceLocale-3.0\AceLocale-3.0.xml

@@ -5,12 +5,6 @@ local ACD = LibStub("AceConfigDialog-3.0")
 
 local lootItemRarity = {3, 4, 5}
 
-local rarityFromColor = {
-	["blue"] = 3,
-	["purple"] = 4,
-	["orange"] = 5,
-}
-
 local hslWarforged = { 44, 448, 499, 546, 547, 560, 561, 562, 571, 644, 645, 646, 651, 656, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 764, 765, 766, 1822, 3336, 3339, 3388, 3389, 3441, 3492, 3585, 3590, 3622, 3624, 3626, 4741, 4742, 4743, 4744, 4745, 4746, 4747, 4748, 4749, 4750, 4751, 4781, 4783, 5131, 5133, 5385, 5471, 5474, 5476, 6310, 6313, 6317, 6319, 6354, 6356, 6425, 6427, 6430, 6431,
 	3337, 3338, 3442, 4782, 4784, 6318, 6320 } --Titanforged
 
@@ -74,26 +68,26 @@ function HearthstoneLoot:OnInitialize()
 		HearthstoneLootOptionsData[OTHER] = 100
 	end
 	if MAW_POWER_DESCRIPTION and not HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] then
-		HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 3
+		HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 2
+	end
+	
+	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then
+		if HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 5 then
+			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 100
+		end
+		HearthstoneLootOptionsData["DataCleaning_1.3"] = true
 	end
 
 	if not HearthstoneLoot_alreadyLootedItems then
 		HearthstoneLoot_alreadyLootedItems = {}
 	end
 
-	if not HearthstoneLoot_alreadyGainBuff then
-		HearthstoneLoot_alreadyGainBuff = {}
-	end
-
 	if MAW_POWER_DESCRIPTION then
-		if not HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] then
-			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 3
-		end
-		self:RegisterEvent("JAILERS_TOWER_LEVEL_UPDATE", "OnEventTowerLevelUpdate")
+		hooksecurefunc(C_PlayerChoice, "SendPlayerChoiceResponse", HearthstoneLoot_SendPlayerChoiceResponseHook)
 	end
+	
 	self:RegisterEvent("PLAYER_STARTED_MOVING", "InitializeVariables")
 	self:RegisterEvent("BAG_UPDATE", "InitializeVariables")
-	self:RegisterEvent("PLAYER_ENTERING_WORLD", "OnEventEnteringWorld")
 	self:RegisterEvent("BOSS_KILL", "OnEventBossKill")
 
 	hooksecurefunc(C_NewItems, "RemoveNewItem", function(i, j)
@@ -203,45 +197,24 @@ function eraseAlreadyLooted(itemID)
 	end
 end
 
-function HearthstoneLoot:OnEventTowerLevelUpdate(event, level)
-	if not HearthstoneLootOptionsData["TorghastShoutDisabled"] and level == 1 then
-		self:RegisterEvent("UNIT_AURA", "OnEventUnitAura")
-		HearthstoneLoot_alreadyGainBuff = {}
-	end
-end
-
-function HearthstoneLoot:OnEventEnteringWorld(event)
-	if MAW_POWER_DESCRIPTION then
-		hslRegisterUnitAura()
-	end
-end
-
-function hslRegisterUnitAura()
-	if not HearthstoneLootOptionsData["TorghastShoutDisabled"] and IsInJailersTower() then
-		HearthstoneLoot:RegisterEvent("UNIT_AURA", "OnEventUnitAura")
-	end
-end
-
-function HearthstoneLoot:OnEventUnitAura(event, unit)
-	if not HearthstoneLootOptionsData["TorghastShoutDisabled"] and IsInJailersTower() and unit == "player" then
-		local numAura = 1
-		local name, _, count, _, _, _, _, _, _, spellId = UnitAura("player", numAura, "MAW")
-		while spellId and count do
-			if not HearthstoneLoot_alreadyGainBuff[spellId.."-"..count] then
-				HearthstoneLoot_alreadyGainBuff[spellId.."-"..count] = true
-				if C_Spell.GetMawPowerBorderAtlasBySpellID(spellId) then
-					local _, _, _, rarityColor = strsplit("-", C_Spell.GetMawPowerBorderAtlasBySpellID(spellId))
-					local rarity = rarityFromColor[rarityColor]
-					if rarity and HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] and rarity >= HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] then
-						HearthstoneLoot_PlayQualitySoundFile(rarity)
+function HearthstoneLoot_SendPlayerChoiceResponseHook(buttonId)
+	if not HearthstoneLootOptionsData["TorghastShoutDisabled"] then
+		if PlayerChoiceFrame.choiceInfo and PlayerChoiceFrame.choiceInfo.options then
+			local choiceRarity
+			for k,v in pairs(PlayerChoiceFrame.choiceInfo.options) do
+				if v.buttons then
+					for k2,v2 in pairs(v.buttons) do
+						if v2.id == buttonId and v.rarity then
+							choiceRarity = v.rarity + 1 -- to match objects quality
+							break
+						end
 					end
 				end
 			end
-			numAura = numAura + 1
-			name, _, count, _, _, _, _, _, _, spellId = UnitAura("player", numAura, "MAW")
+			if choiceRarity and HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] and choiceRarity >= HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] then
+				HearthstoneLoot_PlayQualitySoundFile(choiceRarity)
+			end
 		end
-	elseif not IsInJailersTower() then
-		self:UnregisterEvent("UNIT_AURA")
 	end
 end
 
