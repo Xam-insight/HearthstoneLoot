@@ -1,10 +1,10 @@
-## Interface: 100005
+## Interface: 100007
 ## Title: Hearthstone Loot |T346292:16|t
-## Version: 1.2.13
+## Version: 1.3
 ## Notes: Hearthstone Innkeeper voice on rare, epic and lengendary loots.
 ## Author: Xam_insight
 ## SavedVariables: HearthstoneLootOptionsData
-## SavedVariablesPerCharacter: HearthstoneLoot_alreadyLootedItems, HearthstoneLoot_alreadyGainBuff
+## SavedVariablesPerCharacter: HearthstoneLoot_alreadyLootedItems, HearthstoneLoot_alreadyGainedBuff
 
 Libs\Ace3\LibStub\LibStub.lua
 Libs\Ace3\AceLocale-3.0\AceLocale-3.0.xml

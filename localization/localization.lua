@@ -13,9 +13,9 @@ L["ENABLE_LOOT_SHOUTS_DESC"] = "Enables / disables the Innkeeper voice when loot
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"] = "Enable voice when the mailbox is open"
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"] = "Enables / disables the Innkeeper voice when the mailbox is open."
 
-L["TORGHAST_SECTION"] = "Torghast Options"
+L["TORGHAST_SECTION"] = "Torghast and Primal Storms Options"
 L["ENABLE_ANIMA_POWERS_SHOUTS"] = "Enable voice"
-L["ENABLE_ANIMA_POWERS_SHOUTS_DESC"] = "Enables / disables the Innkeeper voice in Torghast."
+L["ENABLE_ANIMA_POWERS_SHOUTS_DESC"] = "Enables / disables the Innkeeper voice in Torghast and Primal Storms."
 
 L["HSL_ORBETTER"] = "or better"
 L["HSL_ONLY"] = "only"
