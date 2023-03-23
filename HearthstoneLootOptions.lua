@@ -259,6 +259,7 @@ function loadHearthstoneLootOptions()
 					},
 					animaPowersQuality = {
 						type = "select", order = 2,
+						width = 1.4,
 						name = MAW_POWER_DESCRIPTION.." / "..POWER_TYPE_COBALT_POWER,
 						disabled = function()
 							return HearthstoneLootOptionsData["TorghastShoutDisabled"]
