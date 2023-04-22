@@ -108,6 +108,10 @@ end
 
 local hslSoundHandle = nil
 function HearthstoneLoot:HearthstoneLootChatCommand()
+	HearthstoneLoot_OpenOptions()
+end
+
+function HearthstoneLoot_OpenOptions()
 	ACD:Open("HearthstoneLoot")
 	if hslSoundHandle then
 		StopSound(hslSoundHandle)

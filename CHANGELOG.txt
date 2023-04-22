@@ -1,4 +1,6 @@
-﻿- v1.3
+﻿- v1.3.1
+	- TOC for 10.10.0.
+- v1.3
 	- TOC for 10.0.7.
 	- Updated to shout Cobalt Assembly buffs.
 - v1.2.13
