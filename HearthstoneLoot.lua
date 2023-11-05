@@ -10,7 +10,11 @@ local hslWarforged = { 44, 448, 499, 546, 547, 560, 561, 562, 571, 644, 645, 646
 
 local HearthstoneLoot_alreadyVORarity = {}
 
-function HearthstoneLoot:InitializeVariables()
+function HearthstoneLoot:InitializeVariables(event)
+	if event == "SPELLS_CHANGED" then
+		self:UnregisterEvent("SPELLS_CHANGED")
+	end
+
 	if not HSL_RECIPE or not HSL_TRADE_SKILL then
 		local _, _, _, _, _, itemTypeTradeSkill = GetItemInfo(7974)
 		if itemTypeTradeSkill then
@@ -86,7 +90,7 @@ function HearthstoneLoot:OnInitialize()
 		hooksecurefunc(C_PlayerChoice, "SendPlayerChoiceResponse", HearthstoneLoot_SendPlayerChoiceResponseHook)
 	end
 	
-	self:RegisterEvent("PLAYER_STARTED_MOVING", "InitializeVariables")
+	self:RegisterEvent("SPELLS_CHANGED", "InitializeVariables")
 	self:RegisterEvent("BAG_UPDATE", "InitializeVariables")
 	self:RegisterEvent("BOSS_KILL", "OnEventBossKill")
 
