@@ -251,7 +251,6 @@ function loadHearthstoneLootOptions()
 						desc = L["ENABLE_ANIMA_POWERS_SHOUTS_DESC"],
 						set = function(info, val)
 							HearthstoneLootOptionsData["TorghastShoutDisabled"] = not val
-							hslRegisterUnitAura()
 						end,
 						get = function(info)
 							return not HearthstoneLootOptionsData["TorghastShoutDisabled"]
