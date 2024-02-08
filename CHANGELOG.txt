@@ -1,4 +1,6 @@
-﻿- v1.3.3
+﻿- v1.3.4
+	- TOC for 10.2.5.
+- v1.3.3
 	- TOC for 10.2.0.
 	- Fixed: Lua error in options.
 - v1.3.1
