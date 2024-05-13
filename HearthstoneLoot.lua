@@ -71,8 +71,10 @@ function HearthstoneLoot:OnInitialize()
 	if not HearthstoneLootOptionsData[OTHER] then
 		HearthstoneLootOptionsData[OTHER] = 100
 	end
-	if MAW_POWER_DESCRIPTION and not HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] then
-		HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 2
+	if MAW_POWER_DESCRIPTION and
+			(not HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION]
+					or HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 2) then -- Fixed: 2 is not a correct value
+		HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 3
 	end
 	
 	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then

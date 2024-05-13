@@ -1,4 +1,7 @@
-﻿- v1.3.4
+﻿- v1.3.5
+	- TOC for 10.2.7.
+	- Fixed: Anima/Cobalt Powers Quality notification default value is now set to rare.
+- v1.3.4
 	- TOC for 10.2.5.
 - v1.3.3
 	- TOC for 10.2.0.

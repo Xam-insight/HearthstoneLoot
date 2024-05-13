@@ -270,7 +270,7 @@ function loadHearthstoneLootOptions()
 							HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] or 0
+							return HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] or 3
 						end
 					},
 				},
