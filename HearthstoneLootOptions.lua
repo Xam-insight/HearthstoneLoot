@@ -282,3 +282,12 @@ function loadHearthstoneLootOptions()
 	ACD:AddToBlizOptions("HearthstoneLoot", "HearthstoneLoot")
 	ACD:SetDefaultSize("HearthstoneLoot", 420, 543)
 end
+
+function HearthstoneLoot_OpenOptions()
+	ACD:Open("HearthstoneLoot")
+	if hslSoundHandle then
+		StopSound(hslSoundHandle)
+		hslSoundHandle = nil
+	end
+	_, hslSoundHandle = PlaySoundFile(1068313, "Music")
+end

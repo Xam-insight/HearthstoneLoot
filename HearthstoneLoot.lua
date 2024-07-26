@@ -1,7 +1,6 @@
 local HearthstoneLoot = LibStub("AceAddon-3.0"):NewAddon("HearthstoneLoot", "AceConsole-3.0", "AceEvent-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("HearthstoneLoot", true)
 local AceGUI = LibStub("AceGUI-3.0")
-local ACD = LibStub("AceConfigDialog-3.0")
 
 local lootItemRarity = {3, 4, 5}
 
@@ -115,15 +114,6 @@ end
 local hslSoundHandle = nil
 function HearthstoneLoot:HearthstoneLootChatCommand()
 	HearthstoneLoot_OpenOptions()
-end
-
-function HearthstoneLoot_OpenOptions()
-	ACD:Open("HearthstoneLoot")
-	if hslSoundHandle then
-		StopSound(hslSoundHandle)
-		hslSoundHandle = nil
-	end
-	_, hslSoundHandle = PlaySoundFile(1068313, "Music")
 end
 
 function HearthstoneLoot:OnEventNewItemsUpdated(event)
