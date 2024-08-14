@@ -59,7 +59,7 @@ local channelSorting = {
 function loadHearthstoneLootOptions()
 	local HearthstoneLootOptions = {
 		type = "group",
-		name = format("%s |cffADFF2Fv%s|r", "HearthstoneLoot", GetAddOnMetadata("HearthstoneLoot", "Version")),
+		name = format("%s |cffADFF2Fv%s|r", "HearthstoneLoot", C_AddOns.GetAddOnMetadata("HearthstoneLoot", "Version")),
 		args = {
 			language = {
 				type = "group", order = 1,
