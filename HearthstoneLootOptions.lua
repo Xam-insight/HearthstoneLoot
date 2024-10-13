@@ -138,7 +138,7 @@ function loadHearthstoneLootOptions()
 							HearthstoneLootOptionsData[WEAPON] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[WEAPON] or 0
+							return HearthstoneLootOptionsData[WEAPON] or 3
 						end
 					},
 					armorQuality = {
@@ -154,12 +154,12 @@ function loadHearthstoneLootOptions()
 							HearthstoneLootOptionsData[ARMOR] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[ARMOR] or 0
+							return HearthstoneLootOptionsData[ARMOR] or 3
 						end
 					},
 					recipeQuality = {
 						type = "select", order = 4,
-						name = HSL_RECIPE,
+						name = PROFESSIONS_RECIPES_TAB,
 						disabled = function()
 							return HearthstoneLootOptionsData["LootShoutDisabled"]
 						end,
@@ -167,15 +167,15 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[HSL_RECIPE] = val
+							HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[HSL_RECIPE] or 0
+							return HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] or 5
 						end
 					},
 					tradeSkillQuality = {
 						type = "select", order = 5,
-						name = HSL_TRADE_SKILL,
+						name = TRADESKILLS,
 						disabled = function()
 							return HearthstoneLootOptionsData["LootShoutDisabled"]
 						end,
@@ -183,10 +183,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[HSL_TRADE_SKILL] = val
+							HearthstoneLootOptionsData[TRADESKILLS] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[HSL_TRADE_SKILL] or 0
+							return HearthstoneLootOptionsData[TRADESKILLS] or 5
 						end
 					},
 					consumablesQuality = {
@@ -202,7 +202,7 @@ function loadHearthstoneLootOptions()
 							HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] or 0
+							return HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] or 5
 						end
 					},
 					otherQuality = {
@@ -218,7 +218,7 @@ function loadHearthstoneLootOptions()
 							HearthstoneLootOptionsData[OTHER] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[OTHER] or 0
+							return HearthstoneLootOptionsData[OTHER] or 100
 						end
 					},
 					enableLootShoutsInMailbox = {

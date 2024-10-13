@@ -1,4 +1,6 @@
-﻿- v1.3.8
+﻿- v1.3.9
+	- TOC for 11.0.5.
+- v1.3.8
 	- TOC for 11.0.2.
 	- Fixed: Deprecated calls.
 - v1.3.7

@@ -9,47 +9,6 @@ local hslWarforged = { 44, 448, 499, 546, 547, 560, 561, 562, 571, 644, 645, 646
 
 local HearthstoneLoot_alreadyVORarity = {}
 
-function HearthstoneLoot:InitializeVariables(event)
-	if event == "SPELLS_CHANGED" then
-		self:UnregisterEvent("SPELLS_CHANGED")
-	end
-
-	if not HSL_RECIPE or not HSL_TRADE_SKILL then
-		local _, _, _, _, _, itemTypeTradeSkill = GetItemInfo(7974)
-		if itemTypeTradeSkill then
-			HSL_TRADE_SKILL = itemTypeTradeSkill
-			if HSL_TRADE_SKILL and not HearthstoneLootOptionsData[HSL_TRADE_SKILL] then
-				HearthstoneLootOptionsData[HSL_TRADE_SKILL] = 5
-			end
-		end
-
-		local _, _, _, _, _, itemTypeRecipe = GetItemInfo(21099)
-		if itemTypeTradeSkill then
-			HSL_RECIPE = itemTypeRecipe
-			if HSL_RECIPE and not HearthstoneLootOptionsData[HSL_RECIPE] then
-				HearthstoneLootOptionsData[HSL_RECIPE] = 5
-			end
-		end
-
-		if HSL_RECIPE and HSL_TRADE_SKILL then
-			loadHearthstoneLootOptions()
-			self:RegisterChatCommand("hsl", "HearthstoneLootChatCommand")
-			self:Print(L["HSL_WELCOME"])
-		end
-	else
-		self:UnregisterEvent("BAG_UPDATE")
-		self:UnregisterEvent("PLAYER_STARTED_MOVING")
-		self:RegisterEvent("BAG_NEW_ITEMS_UPDATED", function(event)
-			C_Timer.After(0, function(event)
-				HearthstoneLoot:OnEventNewItemsUpdated(event)
-			end)
-			C_Timer.After(1, function(event)
-				HearthstoneLoot:OnEventNewItemsUpdated(event)
-			end)
-		end)
-	end
-end
-
 function HearthstoneLoot:OnInitialize()
 	-- HearthstoneLootOptionsData
 	if not HearthstoneLootOptionsData then
@@ -61,10 +20,16 @@ function HearthstoneLoot:OnInitialize()
 	if not HearthstoneLootOptionsData[WEAPON] then
 		HearthstoneLootOptionsData[WEAPON] = 3
 	end
+	if not HearthstoneLootOptionsData[TRADESKILLS] then
+		HearthstoneLootOptionsData[TRADESKILLS] = 5
+	end
+	if not HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] then
+		HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] = 5
+	end
 	if not HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] then
 		HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] = 5
 	end
-	if HearthstoneLootOptionsData[MISCELLANEOUS] then
+	if HearthstoneLootOptionsData[MISCELLANEOUS] then -- Cleaning
 		HearthstoneLootOptionsData[MISCELLANEOUS] = nil
 	end
 	if not HearthstoneLootOptionsData[OTHER] then
@@ -76,7 +41,7 @@ function HearthstoneLoot:OnInitialize()
 		HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 3
 	end
 	
-	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then
+	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then -- Cleaning
 		if HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 5 then
 			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 100
 		end
@@ -91,8 +56,6 @@ function HearthstoneLoot:OnInitialize()
 		hooksecurefunc(C_PlayerChoice, "SendPlayerChoiceResponse", HearthstoneLoot_SendPlayerChoiceResponseHook)
 	end
 	
-	self:RegisterEvent("SPELLS_CHANGED", "InitializeVariables")
-	self:RegisterEvent("BAG_UPDATE", "InitializeVariables")
 	self:RegisterEvent("BOSS_KILL", "OnEventBossKill")
 
 	hooksecurefunc(C_NewItems, "RemoveNewItem", function(i, j)
@@ -100,6 +63,19 @@ function HearthstoneLoot:OnInitialize()
 		if itemID and i <= NUM_BAG_SLOTS  then
 			eraseAlreadyLooted(itemID)
 		end
+	end)
+	
+	loadHearthstoneLootOptions()
+	self:RegisterChatCommand("hsl", "HearthstoneLootChatCommand")
+	self:Print(L["HSL_WELCOME"])
+
+	self:RegisterEvent("BAG_NEW_ITEMS_UPDATED", function(event)
+		C_Timer.After(0, function(event)
+			HearthstoneLoot:OnEventNewItemsUpdated(event)
+		end)
+		C_Timer.After(1, function(event)
+			HearthstoneLoot:OnEventNewItemsUpdated(event)
+		end)
 	end)
 end
 
@@ -131,7 +107,6 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 					if not timeAlreadyLooted then
 						if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
 							rarity = itemInfo.quality
-
 							isWarforged = nil
 							local itemstring = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
 							if itemstring then
