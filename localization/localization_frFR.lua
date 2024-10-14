@@ -13,7 +13,7 @@ L["ENABLE_LOOT_SHOUTS_DESC"] = "Active / désactive la voix de l'Aubergiste lors
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"] = "Voix active dans la boîte aux lettres"
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"] = "Active / désactive la voix de l'Aubergiste dans la boîte aux lettres."
 
-L["TORGHAST_SECTION"] = "Options de Tourment et Assemblée de Cobalt "
+L["TORGHAST_SECTION"] = "%s, %s et %s"
 L["ENABLE_ANIMA_POWERS_SHOUTS"] = "Voix active"
 L["ENABLE_ANIMA_POWERS_SHOUTS_DESC"] = "Active / désactive la voix de l'Aubergiste dans Tourment et à l'Assemblée de Cobalt."
 

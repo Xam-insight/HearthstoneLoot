@@ -2,6 +2,13 @@ local HearthstoneLoot = LibStub("AceAddon-3.0"):NewAddon("HearthstoneLoot", "Ace
 local L = LibStub("AceLocale-3.0"):GetLocale("HearthstoneLoot", true)
 local AceGUI = LibStub("AceGUI-3.0")
 
+hsl_Armor      = 4
+hsl_Weapon     = 2
+hsl_Tradegoods = 7
+hsl_Recipe     = 9
+hsl_Consumable = 0
+hsl_Other      = "Other"
+
 local lootItemRarity = {3, 4, 5}
 
 local hslWarforged = { 44, 448, 499, 546, 547, 560, 561, 562, 571, 644, 645, 646, 651, 656, 754, 755, 756, 757, 758, 759, 760, 761, 762, 763, 764, 765, 766, 1822, 3336, 3339, 3388, 3389, 3441, 3492, 3585, 3590, 3622, 3624, 3626, 4741, 4742, 4743, 4744, 4745, 4746, 4747, 4748, 4749, 4750, 4751, 4781, 4783, 5131, 5133, 5385, 5471, 5474, 5476, 6310, 6313, 6317, 6319, 6354, 6356, 6425, 6427, 6430, 6431,
@@ -14,26 +21,69 @@ function HearthstoneLoot:OnInitialize()
 	if not HearthstoneLootOptionsData then
 		HearthstoneLootOptionsData = {}
 	end
-	if not HearthstoneLootOptionsData[ARMOR] then
-		HearthstoneLootOptionsData[ARMOR] = 3
+
+	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then -- Cleaning
+		if HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 5 then
+			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 100
+		end
+		HearthstoneLootOptionsData["DataCleaning_1.3"] = true
 	end
-	if not HearthstoneLootOptionsData[WEAPON] then
-		HearthstoneLootOptionsData[WEAPON] = 3
+	
+	if not HearthstoneLootOptionsData["DataCleaning_1.4"] then -- Cleaning
+		local DataCleaning13 = HearthstoneLootOptionsData["DataCleaning_1.3"]
+		local language = HearthstoneLootOptionsData["language"] 
+		local soundChannel = HearthstoneLootOptionsData["soundChannel"]
+		local VictoryMusicEnabled = HearthstoneLootOptionsData["VictoryMusicEnabled"]
+		local LootShoutDisabled = HearthstoneLootOptionsData["LootShoutDisabled"]
+		local LootShoutInMailboxEnabled = HearthstoneLootOptionsData["LootShoutInMailboxEnabled"] 
+		local TorghastShoutDisabled = HearthstoneLootOptionsData["TorghastShoutDisabled"]
+		local AnimaPower = MAW_POWER_DESCRIPTION and HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION]
+		
+		HearthstoneLootOptionsData = {}
+		if DataCleaning13 then
+			HearthstoneLootOptionsData["DataCleaning_1.3"] = DataCleaning13
+		end
+		if language then
+			HearthstoneLootOptionsData["language"] = language
+		end
+		if soundChannel then
+			HearthstoneLootOptionsData["soundChannel"] = soundChannel
+		end
+		if VictoryMusicEnabled then
+			HearthstoneLootOptionsData["VictoryMusicEnabled"] = VictoryMusicEnabled
+		end
+		if LootShoutDisabled then
+			HearthstoneLootOptionsData["LootShoutDisabled"] = LootShoutDisabled
+		end
+		if LootShoutInMailboxEnabled then
+			HearthstoneLootOptionsData["LootShoutInMailboxEnabled"] = LootShoutInMailboxEnabled
+		end
+		if TorghastShoutDisabled then
+			HearthstoneLootOptionsData["TorghastShoutDisabled"] = TorghastShoutDisabled
+		end
+		if MAW_POWER_DESCRIPTION and AnimaPower then
+			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = AnimaPower
+		end
+		HearthstoneLootOptionsData["DataCleaning_1.4"] = true
 	end
-	if not HearthstoneLootOptionsData[TRADESKILLS] then
-		HearthstoneLootOptionsData[TRADESKILLS] = 5
+	
+	if not HearthstoneLootOptionsData[hsl_Armor] then -- Armor
+		HearthstoneLootOptionsData[hsl_Armor] = 3
 	end
-	if not HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] then
-		HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] = 5
+	if not HearthstoneLootOptionsData[hsl_Weapon] then -- Weapon
+		HearthstoneLootOptionsData[hsl_Weapon] = 3
 	end
-	if not HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] then
-		HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] = 5
+	if not HearthstoneLootOptionsData[hsl_Tradegoods] then -- Tradegoods
+		HearthstoneLootOptionsData[hsl_Tradegoods] = 5
 	end
-	if HearthstoneLootOptionsData[MISCELLANEOUS] then -- Cleaning
-		HearthstoneLootOptionsData[MISCELLANEOUS] = nil
+	if not HearthstoneLootOptionsData[hsl_Recipe] then -- Recipe
+		HearthstoneLootOptionsData[hsl_Recipe] = 5
 	end
-	if not HearthstoneLootOptionsData[OTHER] then
-		HearthstoneLootOptionsData[OTHER] = 100
+	if not HearthstoneLootOptionsData[hsl_Consumable] then -- Consumable
+		HearthstoneLootOptionsData[hsl_Consumable] = 5
+	end
+	if not HearthstoneLootOptionsData[hsl_Other] then
+		HearthstoneLootOptionsData[hsl_Other] = 100
 	end
 	if MAW_POWER_DESCRIPTION and
 			(not HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION]
@@ -41,13 +91,6 @@ function HearthstoneLoot:OnInitialize()
 		HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 3
 	end
 	
-	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then -- Cleaning
-		if HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 5 then
-			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 100
-		end
-		HearthstoneLootOptionsData["DataCleaning_1.3"] = true
-	end
-
 	if not HearthstoneLoot_alreadyLootedItems then
 		HearthstoneLoot_alreadyLootedItems = {}
 	end
@@ -60,7 +103,7 @@ function HearthstoneLoot:OnInitialize()
 
 	hooksecurefunc(C_NewItems, "RemoveNewItem", function(i, j)
 		local itemID = C_Container.GetContainerItemID(i, j)
-		if itemID and i <= NUM_BAG_SLOTS  then
+		if itemID and i <= NUM_TOTAL_EQUIPPED_BAG_SLOTS  then
 			eraseAlreadyLooted(itemID)
 		end
 	end)
@@ -93,17 +136,17 @@ function HearthstoneLoot:HearthstoneLootChatCommand()
 end
 
 function HearthstoneLoot:OnEventNewItemsUpdated(event)
+print("event", event)
 	local rarity = 0
 	local isWarforged = nil
 	local bagCheckTime = time()
-	for bag = 0, NUM_BAG_SLOTS do
+	for bag = 0, NUM_TOTAL_EQUIPPED_BAG_SLOTS do
 		for j = 1, C_Container.GetContainerNumSlots(bag) do
 			if C_NewItems.IsNewItem(bag, j) then
 				local itemInfo = C_Container.GetContainerItemInfo(bag, j)
-
-				local _, _, _, _, _, itemType = GetItemInfo(itemInfo.itemID)
+				local _, _, _, _, _, classID = GetItemInfoInstant(itemInfo.itemID)
 				local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
-				if tContains(lootItemRarity, itemInfo.quality) and ((HearthstoneLootOptionsData[itemType] and itemInfo.quality >= HearthstoneLootOptionsData[itemType]) or (not HearthstoneLootOptionsData[itemType] and itemInfo.quality >= HearthstoneLootOptionsData[OTHER])) then
+				if tContains(lootItemRarity, itemInfo.quality) and ((HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[classID]) or (not HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Other])) then
 					if not timeAlreadyLooted then
 						if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
 							rarity = itemInfo.quality

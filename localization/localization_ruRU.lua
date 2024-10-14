@@ -14,7 +14,7 @@ L["ENABLE_LOOT_SHOUTS_DESC"] = "Включает / отключает голос
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"] = "Включить голос когда почтовый ящик открыт"
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"] = "Включает / отключает голос трактирщика когда почтовый ящик открыт."
 
-L["TORGHAST_SECTION"] = "Настройки Торгаста и Кобальтовая ассамблея"
+L["TORGHAST_SECTION"] = "%s, %s и %s"
 L["ENABLE_ANIMA_POWERS_SHOUTS"] = "Включить голос"
 L["ENABLE_ANIMA_POWERS_SHOUTS_DESC"] = "Включает / отключает голос трактирщика в Торгасте и на Кобальтовая ассамблея."
 

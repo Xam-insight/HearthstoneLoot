@@ -13,7 +13,7 @@ L["ENABLE_LOOT_SHOUTS_DESC"] = "Enables / disables the Innkeeper voice when loot
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"] = "Enable voice when the mailbox is open"
 L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"] = "Enables / disables the Innkeeper voice when the mailbox is open."
 
-L["TORGHAST_SECTION"] = "Torghast and Cobalt Assembly Options"
+L["TORGHAST_SECTION"] = "%s, %s and %s"
 L["ENABLE_ANIMA_POWERS_SHOUTS"] = "Enable voice"
 L["ENABLE_ANIMA_POWERS_SHOUTS_DESC"] = "Enables / disables the Innkeeper voice in Torghast and at Cobalt Assembly."
 

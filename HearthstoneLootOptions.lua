@@ -135,10 +135,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[WEAPON] = val
+							HearthstoneLootOptionsData[hsl_Weapon] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[WEAPON] or 3
+							return HearthstoneLootOptionsData[hsl_Weapon]
 						end
 					},
 					armorQuality = {
@@ -151,10 +151,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[ARMOR] = val
+							HearthstoneLootOptionsData[hsl_Armor] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[ARMOR] or 3
+							return HearthstoneLootOptionsData[hsl_Armor]
 						end
 					},
 					recipeQuality = {
@@ -167,10 +167,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] = val
+							HearthstoneLootOptionsData[hsl_Recipe] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[PROFESSIONS_RECIPES_TAB] or 5
+							return HearthstoneLootOptionsData[hsl_Recipe]
 						end
 					},
 					tradeSkillQuality = {
@@ -183,10 +183,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[TRADESKILLS] = val
+							HearthstoneLootOptionsData[hsl_Tradegoods] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[TRADESKILLS] or 5
+							return HearthstoneLootOptionsData[hsl_Tradegoods]
 						end
 					},
 					consumablesQuality = {
@@ -199,10 +199,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] = val
+							HearthstoneLootOptionsData[hsl_Consumable] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[BAG_FILTER_CONSUMABLES] or 5
+							return HearthstoneLootOptionsData[hsl_Consumable]
 						end
 					},
 					otherQuality = {
@@ -215,10 +215,10 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[OTHER] = val
+							HearthstoneLootOptionsData[hsl_Other] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[OTHER] or 100
+							return HearthstoneLootOptionsData[hsl_Other]
 						end
 					},
 					enableLootShoutsInMailbox = {
@@ -241,7 +241,7 @@ function loadHearthstoneLootOptions()
 	if MAW_POWER_DESCRIPTION then
 		local torghast = {
 				type = "group", order = 3,
-				name = L["TORGHAST_SECTION"],
+				name = string.format(L["TORGHAST_SECTION"],(DELVES_LABEL or "Delves"), (MAW_POWER_DESCRIPTION or "Maw power"), (POWER_TYPE_COBALT_POWER or "Cobalt power")),
 				inline = true,
 				args = {
 					enableAnimaPowersShouts = {
@@ -259,9 +259,9 @@ function loadHearthstoneLootOptions()
 					animaPowersQuality = {
 						type = "select", order = 2,
 						width = 1.4,
-						name = MAW_POWER_DESCRIPTION.." / "..POWER_TYPE_COBALT_POWER,
+						name = (MAW_POWER_DESCRIPTION or "Maw power").." / "..(POWER_TYPE_COBALT_POWER or "Cobalt power"),
 						disabled = function()
-							return HearthstoneLootOptionsData["TorghastShoutDisabled"]
+							return not MAW_POWER_DESCRIPTION or HearthstoneLootOptionsData["TorghastShoutDisabled"]
 						end,
 						values = rarityValues,
 						sorting = raritySorting,
@@ -270,7 +270,7 @@ function loadHearthstoneLootOptions()
 							HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] or 3
+							return (MAW_POWER_DESCRIPTION and HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION]) or 3
 						end
 					},
 				},
