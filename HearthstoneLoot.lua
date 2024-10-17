@@ -136,7 +136,6 @@ function HearthstoneLoot:HearthstoneLootChatCommand()
 end
 
 function HearthstoneLoot:OnEventNewItemsUpdated(event)
-print("event", event)
 	local rarity = 0
 	local isWarforged = nil
 	local bagCheckTime = time()
