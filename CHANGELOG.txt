@@ -1,4 +1,6 @@
-﻿- v1.4.2
+﻿- v1.4.3
+	- TOC for 11.1.0.
+- v1.4.2
 	- TOC for 11.0.7.
 - v1.4.1
 	- Fixed: Unnecessary log line removed.
