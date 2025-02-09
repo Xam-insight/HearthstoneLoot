@@ -1,4 +1,6 @@
-﻿- v1.4.3
+﻿- v1.4.4
+	- Added: Separate sections for Mounts, Battlepets and Toys and removed Tradegoods.
+- v1.4.3
 	- TOC for 11.1.0.
 - v1.4.2
 	- TOC for 11.0.7.

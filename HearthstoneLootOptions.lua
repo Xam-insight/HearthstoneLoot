@@ -173,9 +173,9 @@ function loadHearthstoneLootOptions()
 							return HearthstoneLootOptionsData[hsl_Recipe]
 						end
 					},
-					tradeSkillQuality = {
+					mountQuality = {
 						type = "select", order = 5,
-						name = TRADESKILLS,
+						name = MOUNTS,
 						disabled = function()
 							return HearthstoneLootOptionsData["LootShoutDisabled"]
 						end,
@@ -183,14 +183,46 @@ function loadHearthstoneLootOptions()
 						sorting = qualitySorting,
 						set = function(info, val)
 							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
-							HearthstoneLootOptionsData[hsl_Tradegoods] = val
+							HearthstoneLootOptionsData[hsl_Mount] = val
 						end,
 						get = function(info)
-							return HearthstoneLootOptionsData[hsl_Tradegoods]
+							return HearthstoneLootOptionsData[hsl_Mount]
+						end
+					},
+					petQuality = {
+						type = "select", order = 6,
+						name = PETS,
+						disabled = function()
+							return HearthstoneLootOptionsData["LootShoutDisabled"]
+						end,
+						values = qualityValues,
+						sorting = qualitySorting,
+						set = function(info, val)
+							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
+							HearthstoneLootOptionsData[hsl_Pet] = val
+						end,
+						get = function(info)
+							return HearthstoneLootOptionsData[hsl_Pet]
+						end
+					},
+					toyQuality = {
+						type = "select", order = 7,
+						name = TOY,
+						disabled = function()
+							return HearthstoneLootOptionsData["LootShoutDisabled"]
+						end,
+						values = qualityValues,
+						sorting = qualitySorting,
+						set = function(info, val)
+							HearthstoneLoot_PlayQualitySoundFile(val, random(0, 1) == 1)
+							HearthstoneLootOptionsData[hsl_Toys] = val
+						end,
+						get = function(info)
+							return HearthstoneLootOptionsData[hsl_Toys]
 						end
 					},
 					consumablesQuality = {
-						type = "select", order = 6,
+						type = "select", order = 8,
 						name = BAG_FILTER_CONSUMABLES,
 						disabled = function()
 							return HearthstoneLootOptionsData["LootShoutDisabled"]
@@ -206,7 +238,7 @@ function loadHearthstoneLootOptions()
 						end
 					},
 					otherQuality = {
-						type = "select", order = 7,
+						type = "select", order = 9,
 						name = OTHER,
 						disabled = function()
 							return HearthstoneLootOptionsData["LootShoutDisabled"]
@@ -222,7 +254,7 @@ function loadHearthstoneLootOptions()
 						end
 					},
 					enableLootShoutsInMailbox = {
-						type = "toggle", order = 8,
+						type = "toggle", order = 10,
 						width = "full",
 						name = L["ENABLE_LOOT_SHOUTS_IN_MAILBOX"],
 						desc = L["ENABLE_LOOT_SHOUTS_IN_MAILBOX_DESC"],
@@ -280,7 +312,7 @@ function loadHearthstoneLootOptions()
 
 	ACR:RegisterOptionsTable("HearthstoneLoot", HearthstoneLootOptions)
 	ACD:AddToBlizOptions("HearthstoneLoot", "HearthstoneLoot")
-	ACD:SetDefaultSize("HearthstoneLoot", 420, 543)
+	ACD:SetDefaultSize("HearthstoneLoot", 420, 591)
 end
 
 function HearthstoneLoot_OpenOptions()

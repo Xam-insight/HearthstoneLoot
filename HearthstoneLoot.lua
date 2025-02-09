@@ -2,11 +2,14 @@ local HearthstoneLoot = LibStub("AceAddon-3.0"):NewAddon("HearthstoneLoot", "Ace
 local L = LibStub("AceLocale-3.0"):GetLocale("HearthstoneLoot", true)
 local AceGUI = LibStub("AceGUI-3.0")
 
-hsl_Armor      = 4
-hsl_Weapon     = 2
-hsl_Tradegoods = 7
-hsl_Recipe     = 9
-hsl_Consumable = 0
+hsl_Armor      = Enum.ItemClass.Armor      -- 4
+hsl_Weapon     = Enum.ItemClass.Weapon     -- 2
+hsl_Tradegoods = Enum.ItemClass.Tradegoods -- 7 -- Removed
+hsl_Recipe     = Enum.ItemClass.Recipe     -- 9
+hsl_Mount      = "Mounts"
+hsl_Pet        = Enum.ItemClass.Battlepet  -- 17
+hsl_Toys       = "Toys"
+hsl_Consumable = Enum.ItemClass.Consumable -- 0
 hsl_Other      = "Other"
 
 local lootItemRarity = {3, 4, 5}
@@ -73,14 +76,23 @@ function HearthstoneLoot:OnInitialize()
 	if not HearthstoneLootOptionsData[hsl_Weapon] then -- Weapon
 		HearthstoneLootOptionsData[hsl_Weapon] = 3
 	end
-	if not HearthstoneLootOptionsData[hsl_Tradegoods] then -- Tradegoods
-		HearthstoneLootOptionsData[hsl_Tradegoods] = 5
+	if HearthstoneLootOptionsData[hsl_Tradegoods] then -- Tradegoods -- Removed
+		HearthstoneLootOptionsData[hsl_Tradegoods] = nil
 	end
 	if not HearthstoneLootOptionsData[hsl_Recipe] then -- Recipe
 		HearthstoneLootOptionsData[hsl_Recipe] = 5
 	end
 	if not HearthstoneLootOptionsData[hsl_Consumable] then -- Consumable
 		HearthstoneLootOptionsData[hsl_Consumable] = 5
+	end
+	if not HearthstoneLootOptionsData[hsl_Mount] then -- Mount
+		HearthstoneLootOptionsData[hsl_Mount] = 4
+	end
+	if not HearthstoneLootOptionsData[hsl_Pet] then -- Pet
+		HearthstoneLootOptionsData[hsl_Pet] = 4
+	end
+	if not HearthstoneLootOptionsData[hsl_Toys] then -- Toy
+		HearthstoneLootOptionsData[hsl_Toys] = 4
 	end
 	if not HearthstoneLootOptionsData[hsl_Other] then
 		HearthstoneLootOptionsData[hsl_Other] = 100
@@ -143,9 +155,15 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 		for j = 1, C_Container.GetContainerNumSlots(bag) do
 			if C_NewItems.IsNewItem(bag, j) then
 				local itemInfo = C_Container.GetContainerItemInfo(bag, j)
-				local _, _, _, _, _, classID = GetItemInfoInstant(itemInfo.itemID)
+				local _, _, _, _, _, classID, subclassID = GetItemInfoInstant(itemInfo.itemID)
 				local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
-				if tContains(lootItemRarity, itemInfo.quality) and ((HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[classID]) or (not HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Other])) then
+				--self:Print(itemInfo.hyperlink, classID, subclassID, C_ToyBox.GetToyInfo(itemInfo.itemID))
+				if tContains(lootItemRarity, itemInfo.quality)
+						and ((HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[classID])
+							or (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.Mount and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Mount])
+								or (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.CompanionPet and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Pet])
+									or (C_ToyBox.GetToyInfo(itemInfo.itemID) and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Toys])
+											or (not HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Other])) then
 					if not timeAlreadyLooted then
 						if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
 							rarity = itemInfo.quality
