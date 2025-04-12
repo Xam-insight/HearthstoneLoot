@@ -1,10 +1,21 @@
-## Interface: 110007,110100
+## Interface: 110100,110105
 ## Title: Hearthstone Loot
 ## IconTexture: Interface\Icons\item_hearthstone_card_purple.blp
 ## AddonCompartmentFunc: HearthstoneLoot_OpenOptions
-## Version: 1.4.4
+## Version: 1.4.5
 ## Notes: Hearthstone Innkeeper voice on rare, epic and lengendary loots.
 ## Author: Xam_insight
+## Category-enUS: Loot
+## Category-deDE: Beute
+## Category-esES: Botín
+## Category-esMX: Botín
+## Category-frFR: Butin 
+## Category-itIT: Bottino
+## Category-koKR: 전리품
+## Category-ptBR: Saque
+## Category-ruRU: Добыча
+## Category-zhCN: 战利品
+## Category-zhTW: 戰利品
 ## SavedVariables: HearthstoneLootOptionsData
 ## SavedVariablesPerCharacter: HearthstoneLoot_alreadyLootedItems
 
