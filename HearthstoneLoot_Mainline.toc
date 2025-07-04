@@ -1,8 +1,8 @@
-## Interface: 110105,110107
+## Interface: 110107,110200
 ## Title: Hearthstone Loot
 ## IconTexture: Interface\Icons\item_hearthstone_card_purple.blp
 ## AddonCompartmentFunc: HearthstoneLoot_OpenOptions
-## Version: 1.4.6
+## Version: 1.4.7
 ## Notes: Hearthstone Innkeeper voice on rare, epic and lengendary loots.
 ## Author: Xam_insight
 ## Category-enUS: Loot
