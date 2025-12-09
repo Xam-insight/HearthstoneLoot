@@ -1,4 +1,7 @@
-﻿- v1.4.9
+﻿- v1.4.10
+	- TOC for 12.0.0.
+	- [ACE3] 12.0.0 changes integration.
+- v1.4.9
 	- TOC for 11.2.7.
 - v1.4.8
 	- TOC for 11.2.5.
