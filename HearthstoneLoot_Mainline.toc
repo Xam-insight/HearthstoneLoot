@@ -19,8 +19,4 @@
 ## SavedVariables: HearthstoneLootOptionsData
 ## SavedVariablesPerCharacter: HearthstoneLoot_alreadyLootedItems
 
-Libs\Ace3\LibStub\LibStub.lua
-Libs\Ace3\AceLocale-3.0\AceLocale-3.0.xml
-
 embed.xml
-HearthstoneLoot.lua
