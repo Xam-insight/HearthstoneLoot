@@ -26,7 +26,7 @@ function HearthstoneLoot:OnInitialize()
 	end
 
 	if not HearthstoneLootOptionsData["DataCleaning_1.3"] then -- Cleaning
-		if HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 5 then
+		if MAW_POWER_DESCRIPTION and HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] == 5 then
 			HearthstoneLootOptionsData[MAW_POWER_DESCRIPTION] = 100
 		end
 		HearthstoneLootOptionsData["DataCleaning_1.3"] = true
@@ -155,33 +155,35 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 		for j = 1, C_Container.GetContainerNumSlots(bag) do
 			if C_NewItems.IsNewItem(bag, j) then
 				local itemInfo = C_Container.GetContainerItemInfo(bag, j)
-				local _, _, _, _, _, classID, subclassID = GetItemInfoInstant(itemInfo.itemID)
-				local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
-				--self:Print(itemInfo.hyperlink, classID, subclassID, C_ToyBox.GetToyInfo(itemInfo.itemID))
-				if tContains(lootItemRarity, itemInfo.quality)
-						and ((HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[classID])
-							or (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.Mount and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Mount])
-								or (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.CompanionPet and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Pet])
-									or (C_ToyBox.GetToyInfo(itemInfo.itemID) and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Toys])
-											or (not HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Other])) then
-					if not timeAlreadyLooted then
-						if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
-							rarity = itemInfo.quality
-							isWarforged = nil
-							local itemstring = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
-							if itemstring then
-								local numbonuses = select(14, strsplit(":", itemstring))
-								numbonuses = tonumber(numbonuses) or 0
-								for k = 1, numbonuses do
-									local bonus = select(14 + k, strsplit(":", itemstring))
-									if tContains(hslWarforged, tonumber(bonus)) then
-										isWarforged = true
+				if itemInfo then
+					local _, _, _, _, _, classID, subclassID = GetItemInfoInstant(itemInfo.itemID)
+					local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
+					--self:Print(itemInfo.hyperlink, classID, subclassID, C_ToyBox.GetToyInfo(itemInfo.itemID))
+					if tContains(lootItemRarity, itemInfo.quality)
+							and ((HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[classID])
+								or (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.Mount and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Mount])
+									or (classID == Enum.ItemClass.Miscellaneous and subclassID == Enum.ItemMiscellaneousSubclass.CompanionPet and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Pet])
+										or (C_ToyBox.GetToyInfo(itemInfo.itemID) and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Toys])
+												or (not HearthstoneLootOptionsData[classID] and itemInfo.quality >= HearthstoneLootOptionsData[hsl_Other])) then
+						if not timeAlreadyLooted then
+							if itemInfo.quality > rarity or (not isWarforged and itemInfo.quality == rarity) then
+								rarity = itemInfo.quality
+								isWarforged = nil
+								local itemstring = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
+								if itemstring then
+									local numbonuses = select(14, strsplit(":", itemstring))
+									numbonuses = tonumber(numbonuses) or 0
+									for k = 1, numbonuses do
+										local bonus = select(14 + k, strsplit(":", itemstring))
+										if tContains(hslWarforged, tonumber(bonus)) then
+											isWarforged = true
+										end
 									end
 								end
 							end
 						end
+						hslMarkAsAlreadyLooted(itemInfo.hyperlink, bag, bagCheckTime)
 					end
-					hslMarkAsAlreadyLooted(itemInfo.hyperlink, bag, bagCheckTime)
 				end
 			end
 		end
