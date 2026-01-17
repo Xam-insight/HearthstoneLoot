@@ -57,7 +57,6 @@ local channelSorting = {
 	[5] = "Dialog",
 }
 function loadHearthstoneLootOptions()
-	local hearthstoneCard = select(2,GetItemInfo(118427))
 	local HearthstoneLootOptions = {
 		type = "group",
 		name = format("%s |cffADFF2Fv%s|r", "HearthstoneLoot", C_AddOns.GetAddOnMetadata("HearthstoneLoot", "Version")),
@@ -276,7 +275,7 @@ function loadHearthstoneLootOptions()
 					enableHearthstoneCard = {
 						type = "toggle", order = 1,
 						width = "full",
-						name = hearthstoneCard,
+						name = select(2,GetItemInfo(118427)) or "",
 						desc = ENABLE_SOUND,
 						set = function(info, val)
 							HearthstoneLootOptionsData["HearthstoneCardDisabled"] = not val

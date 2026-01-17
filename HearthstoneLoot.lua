@@ -19,6 +19,12 @@ local hslWarforged = { 44, 448, 499, 546, 547, 560, 561, 562, 571, 644, 645, 646
 
 local HearthstoneLoot_alreadyVORarity = {}
 
+local function HearthstoneLootFinishLoad()
+	loadHearthstoneLootOptions()
+	HearthstoneLoot:RegisterChatCommand("hsl", "HearthstoneLootChatCommand")
+	HearthstoneLoot:Print(L["HSL_WELCOME"])
+end
+
 function HearthstoneLoot:OnInitialize()
 	-- HearthstoneLootOptionsData
 	if not HearthstoneLootOptionsData then
@@ -120,9 +126,17 @@ function HearthstoneLoot:OnInitialize()
 		end
 	end)
 	
-	loadHearthstoneLootOptions()
-	self:RegisterChatCommand("hsl", "HearthstoneLootChatCommand")
-	self:Print(L["HSL_WELCOME"])
+	local witnessItemId = 118427
+	local witnessItem = select(2, GetItemInfo(witnessItemId))
+	if witnessItem then
+		HearthstoneLootFinishLoad()
+	else
+		self:RegisterEvent("GET_ITEM_INFO_RECEIVED", function()
+			self:UnregisterEvent("GET_ITEM_INFO_RECEIVED")
+			HearthstoneLootFinishLoad()
+		end)
+		C_Item.RequestLoadItemDataByID(witnessItemId)
+	end
 
 	self:RegisterEvent("BAG_NEW_ITEMS_UPDATED", function(event)
 		C_Timer.After(0, function(event)
