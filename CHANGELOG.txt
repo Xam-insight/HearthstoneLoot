@@ -1,4 +1,6 @@
-﻿- v1.4.12
+﻿- v1.4.13
+	- Code optimization.
+- v1.4.12
 	- Added: Autographed Hearthstone Card support
 - v1.4.10
 	- TOC for 12.0.0.
