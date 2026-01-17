@@ -1,7 +1,8 @@
-﻿- v1.4.10
+﻿- v1.4.11
+	- Added: Autographed Hearthstone Card support
+- v1.4.10
 	- TOC for 12.0.0.
 	- [ACE3] 12.0.0 changes integration.
-	- Added: Autographed Hearthstone Card support
 - v1.4.9
 	- TOC for 11.2.7.
 - v1.4.8
