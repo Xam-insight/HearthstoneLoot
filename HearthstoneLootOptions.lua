@@ -57,11 +57,12 @@ local channelSorting = {
 	[5] = "Dialog",
 }
 function loadHearthstoneLootOptions()
+	local hearthstoneCard = select(2,GetItemInfo(118427))
 	local HearthstoneLootOptions = {
 		type = "group",
 		name = format("%s |cffADFF2Fv%s|r", "HearthstoneLoot", C_AddOns.GetAddOnMetadata("HearthstoneLoot", "Version")),
 		args = {
-			language = {
+			general = {
 				type = "group", order = 1,
 				name = GENERAL,
 				inline = true,
@@ -267,12 +268,36 @@ function loadHearthstoneLootOptions()
 					},
 				},
 			},
+			other = {
+				type = "group", order = 3,
+				name = OTHER,
+				inline = true,
+				args = {
+					enableHearthstoneCard = {
+						type = "toggle", order = 1,
+						width = "full",
+						name = hearthstoneCard,
+						desc = ENABLE_SOUND,
+						set = function(info, val)
+							HearthstoneLootOptionsData["HearthstoneCardDisabled"] = not val
+							if val then
+								HearthstoneLoot_EnableChatFilter()
+							else
+								HearthstoneLoot_DisableChatFilter()
+							end
+						end,
+						get = function(info)
+							return not HearthstoneLootOptionsData["HearthstoneCardDisabled"]
+						end
+					},
+				},
+			},
 		},
 	}
 
 	if MAW_POWER_DESCRIPTION then
 		local torghast = {
-				type = "group", order = 3,
+				type = "group", order = 4,
 				name = string.format(L["TORGHAST_SECTION"],(DELVES_LABEL or "Delves"), (MAW_POWER_DESCRIPTION or "Maw power"), (POWER_TYPE_COBALT_POWER or "Cobalt power")),
 				inline = true,
 				args = {
@@ -312,7 +337,7 @@ function loadHearthstoneLootOptions()
 
 	ACR:RegisterOptionsTable("HearthstoneLoot", HearthstoneLootOptions)
 	ACD:AddToBlizOptions("HearthstoneLoot", "HearthstoneLoot")
-	ACD:SetDefaultSize("HearthstoneLoot", 420, 591)
+	ACD:SetDefaultSize("HearthstoneLoot", 420, 660)
 end
 
 function HearthstoneLoot_OpenOptions()

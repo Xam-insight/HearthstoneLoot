@@ -132,6 +132,44 @@ function HearthstoneLoot:OnInitialize()
 			HearthstoneLoot:OnEventNewItemsUpdated(event)
 		end)
 	end)
+	if not HearthstoneLootOptionsData["HearthstoneCardDisabled"] then
+		HearthstoneLoot_EnableChatFilter()
+	end
+end
+
+function HearthstoneLoot_EnableChatFilter()
+	ChatFrameUtil.AddMessageEventFilter("CHAT_MSG_EMOTE", HearthstoneLoot.ChatFilter)
+end
+
+function HearthstoneLoot_DisableChatFilter()
+	ChatFrameUtil.RemoveMessageEventFilter("CHAT_MSG_EMOTE", HearthstoneLoot.ChatFilter)
+end
+
+local spellName = C_Spell.GetSpellName(175513)
+local q3Lower = string.lower(ITEM_QUALITY3_DESC)
+local q4Lower = string.lower(ITEM_QUALITY4_DESC)
+local q5Lower = string.lower(ITEM_QUALITY5_DESC)
+function HearthstoneLoot:ChatFilter(event, msg, author, ...)
+
+	if not spellName then
+		return false, msg, author, ...
+	end
+
+	-- Le message doit contenir le nom du sort
+	if not string.match(msg, spellName) then
+		return false, msg, author, ...
+	end
+
+	-- Détection de la qualité
+	if string.match(msg, ITEM_QUALITY3_DESC) or string.match(msg, q3Lower) then
+		HearthstoneLoot_PlayQualitySoundFile(3)
+	elseif string.match(msg, ITEM_QUALITY4_DESC) or string.match(msg, q4Lower) then
+		HearthstoneLoot_PlayQualitySoundFile(4)
+	elseif string.match(msg, ITEM_QUALITY5_DESC) or string.match(msg, q5Lower) then
+		HearthstoneLoot_PlayQualitySoundFile(5)
+	end
+
+	return false, msg, author, ...
 end
 
 function HearthstoneLoot:OnEnable()
