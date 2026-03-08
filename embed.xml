@@ -11,6 +11,14 @@
 	<Script file="localization\localization.lua" />
 	<Script file="localization\localization_frFR.lua" />
 	<Script file="localization\localization_ruRU.lua" />
+	<Script file="localization\localization_deDE.lua" />
+	<Script file="localization\localization_itIT.lua" />
+	<Script file="localization\localization_koKR.lua" />
+	<Script file="localization\localization_zhCN.lua" />
+	<Script file="localization\localization_zhTW.lua" />
+	<Script file="localization\localization_esES.lua" />
+	<Script file="localization\localization_esMX.lua" />
+	<Script file="localization\localization_ptBR.lua" />
 	<Script file="embed.lua" />
 	<Script file="HearthstoneLootOptions.lua" />
 	<Script file="HearthstoneLoot.lua" />
