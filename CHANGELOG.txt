@@ -1,4 +1,6 @@
-﻿- v1.4.16
+﻿- v1.4.17
+	- TOC for 12.1.0.
+- v1.4.16
 	- TOC for 12.0.5.
 - v1.4.15
 	- Localization fix (Portuguese and Italian).
