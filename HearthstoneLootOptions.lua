@@ -2,9 +2,9 @@ local ACR = LibStub("AceConfigRegistry-3.0")
 local ACD = LibStub("AceConfigDialog-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("HearthstoneLoot", true)
 
-local _, _, _, rareColorHex = GetItemQualityColor(3)
-local _, _, _, epicColorHex = GetItemQualityColor(4)
-local _, _, _, legendaryColorHex = GetItemQualityColor(5)
+local _, _, _, rareColorHex = C_Item.GetItemQualityColor(3)
+local _, _, _, epicColorHex = C_Item.GetItemQualityColor(4)
+local _, _, _, legendaryColorHex = C_Item.GetItemQualityColor(5)
 
 local qualityValues = {
 	[100] = NONE,
@@ -275,7 +275,7 @@ function loadHearthstoneLootOptions()
 					enableHearthstoneCard = {
 						type = "toggle", order = 1,
 						width = "full",
-						name = select(2,GetItemInfo(118427)) or "",
+						name = select(2,C_Item.GetItemInfo(118427)) or "",
 						desc = ENABLE_SOUND,
 						set = function(info, val)
 							HearthstoneLootOptionsData["HearthstoneCardDisabled"] = not val

@@ -176,7 +176,7 @@ end
 
 function HearthstoneLoot:OnEnable()
 	local witnessItemId = 118427
-	local witnessItem = select(2, GetItemInfo(witnessItemId))
+	local witnessItem = select(2, C_Item.GetItemInfo(witnessItemId))
 	if witnessItem then
 		HearthstoneLootFinishLoad()
 	else
@@ -206,7 +206,7 @@ function HearthstoneLoot:OnEventNewItemsUpdated(event)
 			if C_NewItems.IsNewItem(bag, j) then
 				local itemInfo = C_Container.GetContainerItemInfo(bag, j)
 				if itemInfo then
-					local _, _, _, _, _, classID, subclassID = GetItemInfoInstant(itemInfo.itemID)
+					local _, _, _, _, _, classID, subclassID = C_Item.GetItemInfoInstant(itemInfo.itemID)
 					local timeAlreadyLooted, bagAlreadyLooted = hslGetAlreadyLooted(itemInfo.hyperlink)
 					--self:Print(itemInfo.hyperlink, classID, subclassID, C_ToyBox.GetToyInfo(itemInfo.itemID))
 					if tContains(lootItemRarity, itemInfo.quality)

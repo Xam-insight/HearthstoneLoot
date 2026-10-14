@@ -1,4 +1,9 @@
-﻿- v1.4.17
+﻿- v1.4.18
+	- TOC for 12.1.5.
+	- Deprecated: GetItemQualityColor changed to C_Item.GetItemQualityColor
+	- Deprecated: GetItemInfo changed to C_Item.GetItemInfo
+	- Deprecated: GetItemInfoInstant changed to C_Item.GetItemInfoInstant
+- v1.4.17
 	- TOC for 12.1.0.
 - v1.4.16
 	- TOC for 12.0.5.
