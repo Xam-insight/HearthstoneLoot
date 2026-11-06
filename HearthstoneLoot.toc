@@ -1,6 +1,6 @@
-## Interface: 120105
+## Interface: 16001,120105,120107
 ## Title: Hearthstone Loot
-## Version: 1.4.18
+## Version: 1.4.19
 ## Notes: This file exists only to support packaging systems.
 ## LoadOnDemand: 1
 

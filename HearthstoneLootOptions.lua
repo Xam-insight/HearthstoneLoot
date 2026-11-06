@@ -270,6 +270,7 @@ function loadHearthstoneLootOptions()
 			other = {
 				type = "group", order = 3,
 				name = OTHER,
+				hidden = WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE,
 				inline = true,
 				args = {
 					enableHearthstoneCard = {
